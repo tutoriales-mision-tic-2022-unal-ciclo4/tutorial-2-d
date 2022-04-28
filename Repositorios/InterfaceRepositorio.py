@@ -86,12 +86,10 @@ class InterfaceRepositorio(Generic[T]):
         laColeccion = self.baseDatos[self.coleccion]
         data = []
         for x in laColeccion.aggregate(theQuery):
-            print(x)
             x["_id"] = x["_id"].__str__()
             x = self.transformObjectIds(x)
             x = self.getValuesDBRef(x)
             data.append(x)
-            print("despues ",x)
         return data
 
 
