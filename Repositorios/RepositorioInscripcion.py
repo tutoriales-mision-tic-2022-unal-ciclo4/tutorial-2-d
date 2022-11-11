@@ -35,4 +35,10 @@ class RepositorioInscripcion(InterfaceRepositorio[Inscripcion]):
         }
         pipeline = [query1,query2]
         return self.queryAggregation(pipeline)
+    def test(self,id_materia):
+        query1 = {
+          "$match": {"materia.$id": ObjectId(id_materia)}
+        }
+        pipeline = [query1]
+        return self.queryAggregation(pipeline)
 

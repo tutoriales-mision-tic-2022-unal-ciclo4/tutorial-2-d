@@ -53,6 +53,12 @@ def getDepartamentos():
 def getDepartamento(id):
     json=miControladorDepartamento.show(id)
     return jsonify(json)
+
+@app.route("/departamentos/<string:id>/materias",methods=['GET'])
+def getMateriasDepartamento(id):
+    json=miControladorDepartamento.getMaterias(id)
+    return jsonify(json)
+
 @app.route("/departamentos",methods=['POST'])
 def crearDepartamento():
     data = request.get_json()
@@ -66,6 +72,10 @@ def modificarDepartamento(id):
 @app.route("/departamentos/<string:id>",methods=['DELETE'])
 def eliminarDepartamento(id):
     json=miControladorDepartamento.delete(id)
+    return jsonify(json)
+@app.route("/departamentos/<string:id>/promedio",methods=['GET'])
+def promedioDepartamento(id):
+    json=miControladorDepartamento.getPromedioGeneral(id)
     return jsonify(json)
 ###################################################################################
 @app.route("/materias",methods=['GET'])
@@ -135,8 +145,8 @@ def loadFileConfig():
         data = json.load(f)
     return data
 
+
 if __name__=='__main__':
     dataConfig = loadFileConfig()
     print("Server running : "+"http://"+dataConfig["url-backend"]+":" + str(dataConfig["port"]))
     serve(app,host=dataConfig["url-backend"],port=dataConfig["port"])
-
